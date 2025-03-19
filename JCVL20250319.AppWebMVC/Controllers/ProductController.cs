@@ -19,10 +19,37 @@ namespace JCVL20250319.AppWebMVC.Controllers
         }
 
         // GET: Product
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Product producto)
         {
-            var test20250319DbContext = _context.Products.Include(p => p.Brand).Include(p => p.Category);
-            return View(await test20250319DbContext.ToListAsync());
+
+            var query = _context.Products.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(producto.ProductName))
+                query = query.Where(s => s.ProductName.Contains(producto.ProductName));
+
+            if (producto.BrandId > 0)
+                query = query.Where(s => s.BrandId == producto.BrandId);
+
+            if (producto.CategoryId > 0)
+                query = query.Where(s => s.BrandId == producto.BrandId);
+
+
+            query = query
+                .Include(p => p.Category).Include(p => p.Brand);
+
+            var marcas = _context.Brands.ToList();
+            marcas.Add(new Brand { BrandName = "SELECCIONAR",  BrandId= 0 });
+
+            var categorias = _context.Categories.ToList();
+            categorias.Add(new Category { CategoryName = "SELECCIONAR", CategoryId = 0 });
+
+            ViewData["CategoryId"] = new SelectList(categorias, "Id", "Nombre", 0);
+            ViewData["BrandId"] = new SelectList(marcas, "Id", "Nombre", 0);
+
+
+            
+
+            return View(await query.ToListAsync());
         }
 
         // GET: Product/Details/5
