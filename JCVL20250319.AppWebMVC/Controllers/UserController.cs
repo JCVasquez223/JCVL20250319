@@ -15,8 +15,10 @@ using System.Text;
 
 namespace JCVL20250319.AppWebMVC.Controllers
 {
+   
     public class UserController : Controller
     {
+
         private readonly Test20250319DbContext _context;
 
         public UserController(Test20250319DbContext context)
@@ -75,7 +77,7 @@ namespace JCVL20250319.AppWebMVC.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> CerrarSession()
         {
-            // Hola mundo
+           
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
         }

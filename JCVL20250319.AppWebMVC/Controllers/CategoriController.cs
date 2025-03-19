@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using JCVL20250319.AppWebMVC.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JCVL20250319.AppWebMVC.Controllers
 {
+   
     public class CategoriController : Controller
     {
         private readonly Test20250319DbContext _context;
