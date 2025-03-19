@@ -43,8 +43,8 @@ namespace JCVL20250319.AppWebMVC.Controllers
             var categorias = _context.Categories.ToList();
             categorias.Add(new Category { CategoryName = "SELECCIONAR", CategoryId = 0 });
 
-            ViewData["CategoryId"] = new SelectList(categorias, "Id", "Nombre", 0);
-            ViewData["BrandId"] = new SelectList(marcas, "Id", "Nombre", 0);
+            ViewData["CategoryId"] = new SelectList(categorias, "CategoryId", "CategoryName", 0);
+            ViewData["BrandId"] = new SelectList(marcas, "BrandId", "BrandName", 0);
 
 
             
