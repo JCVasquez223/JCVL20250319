@@ -10,7 +10,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace JCVL20250319.AppWebMVC.Controllers
 {
-  
+    [Authorize]
+
     public class ProductController : Controller
     {
         private readonly Test20250319DbContext _context;
@@ -33,7 +34,7 @@ namespace JCVL20250319.AppWebMVC.Controllers
                 query = query.Where(s => s.BrandId == producto.BrandId);
 
             if (producto.CategoryId > 0)
-                query = query.Where(s => s.BrandId == producto.BrandId);
+                query = query.Where(s => s.CategoryId == producto.CategoryId);
 
 
             query = query

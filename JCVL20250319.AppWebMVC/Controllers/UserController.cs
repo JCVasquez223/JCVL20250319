@@ -15,10 +15,10 @@ using System.Text;
 
 namespace JCVL20250319.AppWebMVC.Controllers
 {
-   
+    [Authorize(Roles = "ADMINISTRADOR")]
+
     public class UserController : Controller
     {
-
         private readonly Test20250319DbContext _context;
 
         public UserController(Test20250319DbContext context)
@@ -61,7 +61,7 @@ namespace JCVL20250319.AppWebMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserId,Username,Email,PasswordHash,Role")] User user)
+        public async Task<IActionResult> Create([Bind("UserId,Username,Email,PasswordHash,ConfirmarPassword,Role")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -196,7 +196,7 @@ namespace JCVL20250319.AppWebMVC.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+            
         private bool UserExists(int id)
         {
             return _context.Users.Any(e => e.UserId == id);

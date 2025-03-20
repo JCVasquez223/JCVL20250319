@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace JCVL20250319.AppWebMVC.Controllers
 {
-   
+    [Authorize]
     public class BrandController : Controller
     {
         private readonly Test20250319DbContext _context;
